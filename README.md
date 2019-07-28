@@ -1,4 +1,3 @@
 Haber Sitesi
 
-ASP.NET MVC
-Bootstrap
+ASP.NET MVC - Bootstrap
