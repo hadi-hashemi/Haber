@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HaberSitesiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Haber">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Baslik" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Ozet" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Icerik" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="Resim" Type="varbinary(max)" />
+    <Property Name="ResimTipi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Durum" Type="int" Nullable="false" />
+    <Property Name="Goster" Type="bit" Nullable="false" />
+    <Property Name="Kullanici_Id" Type="int" Nullable="false" />
+    <Property Name="Kategori_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Kategori">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kategori" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbl_Kullanici">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="KullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HashSifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Yetki" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tbl_Haber_tbl_Kategori">
+    <End Role="tbl_Kategori" Type="Self.tbl_Kategori" Multiplicity="1" />
+    <End Role="tbl_Haber" Type="Self.tbl_Haber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Kategori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_Haber">
+        <PropertyRef Name="Kategori_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Haber_tbl_Kullanici">
+    <End Role="tbl_Kullanici" Type="Self.tbl_Kullanici" Multiplicity="1" />
+    <End Role="tbl_Haber" Type="Self.tbl_Haber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Kullanici">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_Haber">
+        <PropertyRef Name="Kullanici_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HaberSitesiDBModelStoreContainer">
+    <EntitySet Name="tbl_Haber" EntityType="Self.tbl_Haber" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Kategori" EntityType="Self.tbl_Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Kullanici" EntityType="Self.tbl_Kullanici" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tbl_Haber_tbl_Kategori" Association="Self.FK_tbl_Haber_tbl_Kategori">
+      <End Role="tbl_Kategori" EntitySet="tbl_Kategori" />
+      <End Role="tbl_Haber" EntitySet="tbl_Haber" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Haber_tbl_Kullanici" Association="Self.FK_tbl_Haber_tbl_Kullanici">
+      <End Role="tbl_Kullanici" EntitySet="tbl_Kullanici" />
+      <End Role="tbl_Haber" EntitySet="tbl_Haber" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

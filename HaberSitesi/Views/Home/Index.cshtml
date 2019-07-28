@@ -1,0 +1,35 @@
+﻿@model IEnumerable<HaberSitesi.Models.DataBase.tbl_Haber>
+
+@{
+    ViewBag.Title = "Ana Sayfa";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container">
+    <!-- Page Heading -->
+    <h1 class="my-4">
+        Haberler
+        <small>( Tum Haberler )</small>
+    </h1>
+
+    @foreach(var haber in Model)
+    {
+        <!-- Project One -->
+        <div class="row">
+            <div class="col-md-7">
+                <a href="#">
+                    <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+                </a>
+            </div>
+            <div class="col-md-5">
+                <h3>@haber.Baslik</h3>
+                <p>@haber.Ozet</p>
+                <a class="btn btn-info" href="#">Devamını oku</a>
+            </div>
+        </div>
+        <hr>
+    }
+
+</div>
+<!-- /.container -->
